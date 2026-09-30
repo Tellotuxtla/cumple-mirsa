@@ -481,12 +481,18 @@
     <header class="hero-banner">
       <!-- Botón de música ambiental -->
       <button type="button" class="audio-btn" id="audioToggle" onclick="toggleAudio()" title="Música ambiental">
-        <div class="audio-bars">
+        <div class="audio-bars" id="audioBars">
           <div class="audio-bar bar-1"></div>
           <div class="audio-bar bar-2"></div>
           <div class="audio-bar bar-3"></div>
         </div>
       </button>
+
+      <!-- Elemento de audio HTML5 para archivo local musica.mp3 o URL -->
+      <audio id="bgAudio" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+        <source src="musica.ogg" type="audio/ogg">
+      </audio>
 
       <svg class="flower-left" viewBox="0 0 160 400">
         <circle cx="30" cy="70" r="26" fill="#d95e3f"/>
@@ -557,13 +563,14 @@
           Momentos Especiales
         </h2>
 
+        <!-- FOTO PRINCIPAL: Carga 'foto.jpg' colocada junto a index.html en GitHub -->
         <div class="photo-frame">
           <img 
             id="featuredPhoto" 
-            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" 
+            src="foto.jpg" 
             alt="Mirsa Vázquez"
             loading="eager"
-            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80';"
+            onerror="if(this.src.indexOf('unsplash') === -1) { this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'; }"
           />
         </div>
 
@@ -572,7 +579,7 @@
             🔗 Pegar enlace de foto
           </button>
           <label class="photo-btn">
-            📷 Subir archivo
+            📷 Subir foto desde el celular
             <input type="file" accept="image/*" style="display:none;" onchange="previewLocalPhoto(event)">
           </label>
         </div>
@@ -723,8 +730,6 @@
     /* =========================================================
        1. CUENTA REGRESIVA BLINDADA (100% COMPATIBLE CON IOS SAFARI)
        ========================================================= */
-    // Evento: Sábado 10 de octubre de 2026 a las 14:00:00 (Mes 9 = Octubre en JS 0-indexed)
-    // Se calcula usando Date.UTC o parámetros enteros para evitar fallos de parseo en iPhone
     var targetTimestamp = new Date(2026, 9, 10, 14, 0, 0).getTime();
 
     function updateCountdown() {
@@ -762,7 +767,6 @@
       }
     }
 
-    // Ejecutar inmediatamente al cargar el script y sincronizar con setInterval
     updateCountdown();
     var timerInterval = setInterval(updateCountdown, 1000);
     window.addEventListener('load', updateCountdown);
@@ -771,34 +775,73 @@
     });
 
     /* =========================================================
-       2. REPRODUCTOR DE AUDIO SINCRONIZADO
+       2. REPRODUCTOR DE MÚSICA CON SOPORTE MP3 Y SINTETIZADOR DE RESPALDO
        ========================================================= */
+    var audioElement = document.getElementById('bgAudio');
     var audioCtx = null;
     var isAudioPlaying = false;
     var melodyTimer = null;
+    var usingSynthesizer = false;
 
-    function toggleAudio() {
+    // Iniciar con la primera interacción del usuario (requerido por iOS/Android)
+    function autoPlayOnFirstTouch() {
+      if (!isAudioPlaying) {
+        toggleAudio(true);
+      }
+      document.removeEventListener('click', autoPlayOnFirstTouch);
+      document.removeEventListener('touchstart', autoPlayOnFirstTouch);
+    }
+    document.addEventListener('click', autoPlayOnFirstTouch, { once: true });
+    document.addEventListener('touchstart', autoPlayOnFirstTouch, { once: true });
+
+    function toggleAudio(isAutoplayTrigger) {
       var btn = document.getElementById('audioToggle');
-      if (isAudioPlaying) {
+
+      if (isAudioPlaying && !isAutoplayTrigger) {
+        // Pausar
         isAudioPlaying = false;
         btn.classList.remove('audio-playing');
+        if (audioElement) audioElement.pause();
         if (melodyTimer) clearInterval(melodyTimer);
         showToast("Música pausada");
       } else {
-        try {
-          if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // Reproducir archivo musica.mp3 primero
+        if (audioElement && audioElement.src) {
+          var playPromise = audioElement.play();
+          if (playPromise !== undefined) {
+            playPromise.then(function() {
+              isAudioPlaying = true;
+              usingSynthesizer = false;
+              btn.classList.add('audio-playing');
+              if (!isAutoplayTrigger) showToast("Reproduciendo música");
+            }).catch(function() {
+              // Si falla o no existe musica.mp3, usamos el sintetizador acústico de respaldo
+              startSynthFallback(btn, isAutoplayTrigger);
+            });
+          } else {
+            startSynthFallback(btn, isAutoplayTrigger);
           }
-          if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-          }
-          playMelody();
-          isAudioPlaying = true;
-          btn.classList.add('audio-playing');
-          showToast("Reproduciendo música ambiental");
-        } catch (e) {
-          console.log("Audio no soportado:", e);
+        } else {
+          startSynthFallback(btn, isAutoplayTrigger);
         }
+      }
+    }
+
+    function startSynthFallback(btn, isAutoplayTrigger) {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        playMelody();
+        isAudioPlaying = true;
+        usingSynthesizer = true;
+        btn.classList.add('audio-playing');
+        if (!isAutoplayTrigger) showToast("Reproduciendo música ambiental");
+      } catch (err) {
+        console.warn("No se pudo iniciar el audio:", err);
       }
     }
 
@@ -808,11 +851,9 @@
       var gain = audioCtx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime + start);
-      
       gain.gain.setValueAtTime(0, audioCtx.currentTime + start);
-      gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + start + 0.05);
+      gain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + start + 0.05);
       gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + start + duration);
-
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start(audioCtx.currentTime + start);
@@ -820,17 +861,15 @@
     }
 
     function playMelody() {
-      // Melodía acústica relajante en arpegio cálido
       var notes = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 293.66, 369.99, 440.00, 587.33];
       var step = 0;
       function stepMelody() {
-        if (!isAudioPlaying) return;
-        var note = notes[step % notes.length];
-        playNote(note, 0, 1.2);
+        if (!isAudioPlaying || !usingSynthesizer) return;
+        playNote(notes[step % notes.length], 0, 1.2);
         step++;
       }
       stepMelody();
-      melodyTimer = setInterval(stepMelody, 600);
+      melodyTimer = setInterval(stepMelody, 650);
     }
 
     /* =========================================================
