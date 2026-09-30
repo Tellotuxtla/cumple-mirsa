@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mi Cumpleaños - Mirsa Vázquez</title>
+
+  <!-- Open Graph para compartir por WhatsApp -->
+  <meta property="og:title" content="Mi Cumpleaños - Mirsa Vázquez" />
+  <meta property="og:description" content="¡Te invito a celebrar conmigo! Sábado 10 de octubre de 2026, 2:00 p.m. en Salón Barrera, Villa Corzo." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" />
+  <meta property="og:type" content="website" />
+
+  <!-- Tipografías elegantes de Google Fonts con fallbacks seguros -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500;1,600;1,700&family=Great+Vibes&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f5d4c5;
+      color: #3b221a;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .font-script {
+      font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* Contenedor móvil optimizado para iOS/Android */
+    .mobile-container {
+      width: 100%;
+      max-width: 430px;
+      background: linear-gradient(180deg, #fbe2d3 0%, #fdece3 35%, #fae0d4 100%);
+      min-height: 100vh;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
+      padding-bottom: 60px;
+    }
+
+    .hero-banner {
+      background: radial-gradient(circle at 50% 60%, #ffcf96 0%, #eb9265 45%, #c9563b 90%);
+      padding: 60px 20px 65px 20px;
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sun-glow {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fffaf2 0%, #ffd49e 70%, transparent 100%);
+      margin: 0 auto 16px auto;
+      box-shadow: 0 0 45px #ffd49e;
+    }
+
+    .hero-title {
+      font-size: 3.8rem;
+      line-height: 1.1;
+      font-weight: 400;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+      margin-bottom: 4px;
+    }
+
+    .hero-subtitle {
+      font-size: 2.3rem;
+      font-weight: 400;
+      color: #fff6ee;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.38);
+    }
+
+    /* Botón flotante superior de audio */
+    .audio-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #ffffff;
+      z-index: 20;
+    }
+
+    .audio-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 16px;
+    }
+
+    .audio-bar {
+      width: 3px;
+      background: #ffffff;
+      border-radius: 2px;
+      height: 6px;
+    }
+
+    .audio-playing .bar-1 { animation: pulse 0.7s infinite alternate ease-in-out; }
+    .audio-playing .bar-2 { animation: pulse 1.1s infinite alternate 0.2s ease-in-out; }
+    .audio-playing .bar-3 { animation: pulse 0.9s infinite alternate 0.4s ease-in-out; }
+
+    @keyframes pulse {
+      0% { height: 4px; }
+      100% { height: 16px; }
+    }
+
+    /* Ilustraciones florales SVG */
+    .flower-left, .flower-right {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 150px;
+      pointer-events: none;
+      opacity: 0.42;
+    }
+    .flower-left { left: -10px; }
+    .flower-right { right: -10px; }
+
+    .content-wrapper {
+      padding: 0 16px;
+      margin-top: -28px;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 24px 20px;
+      box-shadow: 0 10px 24px -4px rgba(184, 84, 58, 0.12), 0 3px 10px rgba(0, 0, 0, 0.04);
+      position: relative;
+      border: 1px solid rgba(255, 238, 230, 0.9);
+    }
+
+    .pin-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f08264 0%, #d86c4f 100%);
+      box-shadow: 0 5px 14px rgba(216, 108, 79, 0.38);
+      position: absolute;
+      top: -20px;
+      left: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .pin-badge svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .card-title {
+      font-size: 2.2rem;
+      color: #3b221a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+    .card-title svg {
+      width: 22px;
+      height: 22px;
+      fill: #d86c4f;
+      flex-shrink: 0;
+    }
+
+    .countdown-header {
+      font-size: 2.2rem;
+      color: #44241a;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      gap: 6px;
+    }
+
+    .countdown-val {
+      font-size: 2.45rem;
+      font-weight: 700;
+      color: #27140e;
+      line-height: 1;
+      font-style: italic;
+    }
+
+    .countdown-lbl {
+      font-size: 1.35rem;
+      color: #8c6052;
+      margin-top: 4px;
+    }
+
+    .photo-frame {
+      width: 100%;
+      height: 300px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fdf5f1;
+      position: relative;
+      border: 1px solid rgba(216, 108, 79, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .photo-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .photo-btn {
+      background: #ffffff;
+      border: 1px solid #f0d5c8;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #7b4231;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    /* Filas de Fecha, Hora y Ubicación */
+    .detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .detail-icon-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #fdeee8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d86c4f;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .detail-icon-circle svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .detail-text {
+      font-size: 1.45rem;
+      font-style: italic;
+      font-weight: 600;
+      color: #341e17;
+      line-height: 1.3;
+    }
+
+    .place-name {
+      font-size: 1.7rem;
+      color: #d66447;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #e4785c 0%, #cb5a3b 100%);
+      color: #ffffff !important;
+      font-size: 1.6rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 8px 18px rgba(216, 108, 79, 0.32);
+      font-style: italic;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #cb5a3b !important;
+      border: 2px solid #e4785c;
+      font-size: 1.6rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 18px;
+      cursor: pointer;
+      width: 100%;
+      font-style: italic;
+    }
+
+    .buttons-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .wallet-section {
+      text-align: center;
+    }
+
+    .wallet-subtitle {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: #7b584f;
+      margin-bottom: 22px;
+    }
+
+    .wallet-stack-wrapper {
+      position: relative;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .w-card {
+      position: absolute;
+      width: 250px;
+      height: 155px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+    }
+
+    .w-teal {
+      background: linear-gradient(135deg, #4db5a5 0%, #2f8e7f 100%);
+      transform: rotate(12deg) translateY(12px) translateX(18px);
+    }
+
+    .w-purple {
+      background: linear-gradient(135deg, #6c73f0 0%, #5055d4 100%);
+      transform: rotate(-12deg) translateY(12px) translateX(-18px);
+    }
+
+    .w-front {
+      background: linear-gradient(135deg, #dc755a 0%, #c45a3e 100%);
+      transform: rotate(0deg);
+      box-shadow: 0 14px 30px rgba(184, 84, 58, 0.35);
+      z-index: 5;
+    }
+
+    .barcode-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      padding-top: 6px;
+    }
+
+    .bar {
+      background: #ffffff;
+      width: 2px;
+      height: 100%;
+      opacity: 0.9;
+    }
+    .bar.thin { width: 1px; height: 70%; }
+    .bar.thick { width: 3.5px; height: 100%; }
+
+    /* Footer */
+    .invitation-footer {
+      text-align: center;
+      margin-top: 10px;
+      padding: 10px 20px 20px 20px;
+    }
+
+    .footer-phrase {
+      font-size: 1.85rem;
+      color: #8c5b4d;
+      margin-bottom: 12px;
+    }
+
+    .footer-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 7px 18px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      color: #6d463b;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #3c1e16;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 100;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      pointer-events: none;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-container">
+
+    <!-- Header con sol central y vectores florales -->
+    <header class="hero-banner">
+      <!-- Botón de música ambiental -->
+      <button type="button" class="audio-btn" id="audioToggle" onclick="toggleAudio()" title="Música ambiental">
+        <div class="audio-bars">
+          <div class="audio-bar bar-1"></div>
+          <div class="audio-bar bar-2"></div>
+          <div class="audio-bar bar-3"></div>
+        </div>
+      </button>
+
+      <svg class="flower-left" viewBox="0 0 160 400">
+        <circle cx="30" cy="70" r="26" fill="#d95e3f"/>
+        <circle cx="20" cy="50" r="18" fill="#f08865"/>
+        <circle cx="55" cy="60" r="16" fill="#f08865"/>
+        <circle cx="35" cy="88" r="16" fill="#e66f4c"/>
+        <circle cx="30" cy="70" r="8" fill="#691f11"/>
+        <path d="M 30 90 Q 50 190 25 360" stroke="#7e2714" stroke-width="3" fill="none"/>
+        <circle cx="40" cy="220" r="30" fill="#d95e3f"/>
+        <circle cx="22" cy="205" r="20" fill="#f08865"/>
+        <circle cx="60" cy="215" r="18" fill="#f08865"/>
+        <circle cx="45" cy="242" r="18" fill="#e66f4c"/>
+        <circle cx="40" cy="220" r="9" fill="#691f11"/>
+      </svg>
+
+      <svg class="flower-right" viewBox="0 0 160 400">
+        <circle cx="130" cy="90" r="28" fill="#d95e3f"/>
+        <circle cx="112" cy="75" r="19" fill="#f08865"/>
+        <circle cx="145" cy="80" r="18" fill="#f08865"/>
+        <circle cx="135" cy="110" r="18" fill="#e66f4c"/>
+        <circle cx="130" cy="90" r="8" fill="#691f11"/>
+        <path d="M 130 110 Q 105 200 135 370" stroke="#7e2714" stroke-width="3" fill="none"/>
+        <circle cx="120" cy="230" r="32" fill="#d95e3f"/>
+        <circle cx="100" cy="212" r="22" fill="#f08865"/>
+        <circle cx="140" cy="222" r="20" fill="#f08865"/>
+        <circle cx="125" cy="252" r="20" fill="#e66f4c"/>
+        <circle cx="120" cy="230" r="9" fill="#691f11"/>
+      </svg>
+
+      <div class="sun-glow"></div>
+      <h1 class="font-script hero-title">Mi Cumpleaños</h1>
+      <p class="font-script hero-subtitle">Mirsa Vazquez</p>
+    </header>
+
+    <div class="content-wrapper">
+
+      <!-- 1. Cuenta Regresiva -->
+      <section class="card">
+        <h2 class="font-script countdown-header">✨ Cuenta Regresiva ✨</h2>
+        <div class="countdown-grid">
+          <div>
+            <div id="days" class="font-serif countdown-val">--</div>
+            <div class="font-script countdown-lbl">Días</div>
+          </div>
+          <div>
+            <div id="hours" class="font-serif countdown-val">--</div>
+            <div class="font-script countdown-lbl">Horas</div>
+          </div>
+          <div>
+            <div id="minutes" class="font-serif countdown-val">--</div>
+            <div class="font-script countdown-lbl">Minutos</div>
+          </div>
+          <div>
+            <div id="seconds" class="font-serif countdown-val">--</div>
+            <div class="font-script countdown-lbl">Segundos</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Momentos Especiales con Foto -->
+      <section class="card">
+        <div class="pin-badge">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        </div>
+
+        <h2 class="font-script card-title">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          Momentos Especiales
+        </h2>
+
+        <div class="photo-frame">
+          <img 
+            id="featuredPhoto" 
+            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" 
+            alt="Mirsa Vázquez"
+            loading="eager"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80';"
+          />
+        </div>
+
+        <div class="photo-actions">
+          <button type="button" class="photo-btn" onclick="promptPhotoUrl()">
+            🔗 Pegar enlace de foto
+          </button>
+          <label class="photo-btn">
+            📷 Subir archivo
+            <input type="file" accept="image/*" style="display:none;" onchange="previewLocalPhoto(event)">
+          </label>
+        </div>
+      </section>
+
+      <!-- 3. Fecha y Hora -->
+      <section class="card">
+        <div class="pin-badge">
+          <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+        </div>
+
+        <h2 class="font-script card-title">
+          <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+          Fecha y Hora
+        </h2>
+
+        <div class="detail-row">
+          <div class="detail-icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+          </div>
+          <div class="font-serif detail-text">Sábado, 10 de octubre de 2026</div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          </div>
+          <div class="font-serif detail-text">2:00 p. m.</div>
+        </div>
+
+        <div class="buttons-grid">
+          <button type="button" class="btn-primary font-script" onclick="addToGoogleCalendar()">
+            📅 Agregar a Google Calendar
+          </button>
+          <button type="button" class="btn-secondary font-script" onclick="downloadICS()">
+            🗓️ Apple Calendar / Outlook (.ics)
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Ubicación -->
+      <section class="card">
+        <div class="pin-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+
+        <h2 class="font-script card-title">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ubicación
+        </h2>
+
+        <div class="detail-row">
+          <div class="detail-icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <div class="font-script place-name">Salón: Barrera</div>
+            <div class="font-serif detail-text" style="font-weight: 500;">
+              Tercera Pte. Nte. 52, Conasupo,<br>
+              30520 Villa Corzo, Chis., México
+            </div>
+          </div>
+        </div>
+
+        <div class="buttons-grid">
+          <a class="btn-primary font-script" href="https://www.google.com/maps/search/?api=1&query=Tercera+Pte.+Nte.+52,+Conasupo,+30520+Villa+Corzo,+Chis.,+M%C3%A9xico" target="_blank" rel="noopener noreferrer">
+            📍 Ver en Google Maps
+          </a>
+          <a class="btn-secondary font-script" href="https://waze.com/ul?q=Tercera%20Pte.%20Nte.%2052,%20Conasupo,%20Villa%20Corzo,%20Chiapas" target="_blank" rel="noopener noreferrer">
+            🚗 Abrir en Waze
+          </a>
+        </div>
+      </section>
+
+      <!-- 5. Guarda tu invitación -->
+      <section class="card wallet-section">
+        <div class="pin-badge">
+          <svg viewBox="0 0 24 24"><path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.5c-1.25.78-2 2.17-2 3.5s.75 2.72 2 3.5V18H4v-2.5c1.25-.78 2-2.17 2-3.5s-.75-2.72-2-3.5V6h16v2.5z"/></svg>
+        </div>
+
+        <h2 class="font-script card-title" style="justify-content: center; margin-top: 14px; margin-bottom: 4px;">
+          Guarda tu invitación
+        </h2>
+        <p class="font-serif wallet-subtitle">
+          Llévala en tu bolsillo — aparece sola el día del evento.
+        </p>
+
+        <div class="wallet-stack-wrapper">
+          <div class="w-card w-teal">
+            <span style="font-size: 0.75rem; opacity: 0.85;">Pase Especial</span>
+            <span class="font-serif" style="font-style: italic; font-size: 0.95rem;">Villa Corzo, Chiapas</span>
+          </div>
+          <div class="w-card w-purple">
+            <span style="font-size: 0.75rem; opacity: 0.85;">Invitación</span>
+            <span class="font-serif" style="font-style: italic; font-size: 0.95rem;">Mirsa Vázquez</span>
+          </div>
+          <div class="w-card w-front">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-script" style="font-size: 1.4rem;">Wallet</span>
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffffff; opacity: 0.8;"></div>
+            </div>
+            <div>
+              <div class="font-script" style="font-size: 2.1rem; line-height: 1.1;">Mi Cumpleaños</div>
+              <div style="font-size: 0.7rem; letter-spacing: 1.5px; opacity: 0.9; margin-top: 3px;">10 OCT &bull; 2:00 PM</div>
+            </div>
+            <div class="barcode-row">
+              <span class="bar"></span>
+              <span class="bar thin"></span>
+              <span class="bar thick"></span>
+              <span class="bar thin"></span>
+              <span class="bar"></span>
+              <span class="bar thick"></span>
+              <span class="bar thin"></span>
+              <span class="bar"></span>
+              <span class="bar thick"></span>
+              <span class="bar thin"></span>
+              <span class="bar"></span>
+              <span class="bar thin"></span>
+              <span class="bar thick"></span>
+              <span class="bar"></span>
+              <span class="bar thin"></span>
+              <span class="bar thick"></span>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary font-script" onclick="shareInvite()">
+          📤 Compartir Invitación
+        </button>
+      </section>
+
+      <!-- Pie de página -->
+      <footer class="invitation-footer">
+        <p class="font-script footer-phrase">¡Te espero para celebrar juntos este día tan especial!</p>
+        <div class="footer-pill">
+          🎉 Mi Cumpleaños &bull; Salón Barrera
+        </div>
+      </footer>
+
+    </div>
+
+    <div id="toast">Enlace copiado al portapapeles</div>
+
+  </div>
+
+  <script>
+    /* =========================================================
+       1. CUENTA REGRESIVA BLINDADA (100% COMPATIBLE CON IOS SAFARI)
+       ========================================================= */
+    // Evento: Sábado 10 de octubre de 2026 a las 14:00:00 (Mes 9 = Octubre en JS 0-indexed)
+    // Se calcula usando Date.UTC o parámetros enteros para evitar fallos de parseo en iPhone
+    var targetTimestamp = new Date(2026, 9, 10, 14, 0, 0).getTime();
+
+    function updateCountdown() {
+      try {
+        var now = new Date().getTime();
+        var diff = targetTimestamp - now;
+
+        var daysEl = document.getElementById('days');
+        var hoursEl = document.getElementById('hours');
+        var minsEl = document.getElementById('minutes');
+        var secsEl = document.getElementById('seconds');
+
+        if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+        if (diff <= 0) {
+          daysEl.textContent = "00";
+          hoursEl.textContent = "00";
+          minsEl.textContent = "00";
+          secsEl.textContent = "00";
+          return;
+        }
+
+        var totalSeconds = Math.floor(diff / 1000);
+        var d = Math.floor(totalSeconds / (3600 * 24));
+        var h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        var m = Math.floor((totalSeconds % 3600) / 60);
+        var s = Math.floor(totalSeconds % 60);
+
+        daysEl.textContent = d < 10 ? "0" + d : d;
+        hoursEl.textContent = h < 10 ? "0" + h : h;
+        minsEl.textContent = m < 10 ? "0" + m : m;
+        secsEl.textContent = s < 10 ? "0" + s : s;
+      } catch (err) {
+        console.error("Countdown calculation error:", err);
+      }
+    }
+
+    // Ejecutar inmediatamente al cargar el script y sincronizar con setInterval
+    updateCountdown();
+    var timerInterval = setInterval(updateCountdown, 1000);
+    window.addEventListener('load', updateCountdown);
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) updateCountdown();
+    });
+
+    /* =========================================================
+       2. REPRODUCTOR DE AUDIO SINCRONIZADO
+       ========================================================= */
+    var audioCtx = null;
+    var isAudioPlaying = false;
+    var melodyTimer = null;
+
+    function toggleAudio() {
+      var btn = document.getElementById('audioToggle');
+      if (isAudioPlaying) {
+        isAudioPlaying = false;
+        btn.classList.remove('audio-playing');
+        if (melodyTimer) clearInterval(melodyTimer);
+        showToast("Música pausada");
+      } else {
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          playMelody();
+          isAudioPlaying = true;
+          btn.classList.add('audio-playing');
+          showToast("Reproduciendo música ambiental");
+        } catch (e) {
+          console.log("Audio no soportado:", e);
+        }
+      }
+    }
+
+    function playNote(freq, start, duration) {
+      if (!audioCtx) return;
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime + start);
+      
+      gain.gain.setValueAtTime(0, audioCtx.currentTime + start);
+      gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + start + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + start + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(audioCtx.currentTime + start);
+      osc.stop(audioCtx.currentTime + start + duration);
+    }
+
+    function playMelody() {
+      // Melodía acústica relajante en arpegio cálido
+      var notes = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 293.66, 369.99, 440.00, 587.33];
+      var step = 0;
+      function stepMelody() {
+        if (!isAudioPlaying) return;
+        var note = notes[step % notes.length];
+        playNote(note, 0, 1.2);
+        step++;
+      }
+      stepMelody();
+      melodyTimer = setInterval(stepMelody, 600);
+    }
+
+    /* =========================================================
+       3. FOTO DINÁMICA
+       ========================================================= */
+    function promptPhotoUrl() {
+      var photoEl = document.getElementById('featuredPhoto');
+      var current = photoEl ? photoEl.src : "";
+      var res = window.prompt("Pega la URL web de tu foto:", current);
+      if (res && res.trim() !== "") {
+        if (photoEl) photoEl.src = res.trim();
+        showToast("Foto actualizada correctamente");
+      }
+    }
+
+    function previewLocalPhoto(event) {
+      var file = event.target.files[0];
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var photoEl = document.getElementById('featuredPhoto');
+          if (photoEl) photoEl.src = e.target.result;
+          showToast("Foto cargada desde tu dispositivo");
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    /* =========================================================
+       4. CALENDARIO Y DESCARGA
+       ========================================================= */
+    function addToGoogleCalendar() {
+      var title = encodeURIComponent("Mi Cumpleaños - Mirsa Vázquez");
+      var details = encodeURIComponent("Celebración del cumpleaños de Mirsa Vázquez en Salón Barrera, Villa Corzo.");
+      var location = encodeURIComponent("Tercera Pte. Nte. 52, Conasupo, 30520 Villa Corzo, Chis., México");
+      var dates = "20261010T200000Z/20261011T040000Z";
+      var url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + title + "&dates=" + dates + "&details=" + details + "&location=" + location;
+      window.open(url, '_blank');
+    }
+
+    function downloadICS() {
+      var icsData = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Invitacion Mirsa Vazquez//ES",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        "UID:mirsa-cumple-2026@invitacion",
+        "DTSTAMP:20260101T000000Z",
+        "DTSTART:20261010T200000Z",
+        "DTEND:20261011T040000Z",
+        "SUMMARY:Mi Cumpleaños - Mirsa Vázquez",
+        "DESCRIPTION:Celebración en Salón Barrera\\, Villa Corzo.",
+        "LOCATION:Tercera Pte. Nte. 52\\, Conasupo\\, 30520 Villa Corzo\\, Chis.\\, México",
+        "STATUS:CONFIRMED",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      var blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+      var link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", "Cumpleanos_Mirsa_Vazquez.ics");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("Descargando evento de calendario...");
+    }
+
+    /* =========================================================
+       5. COMPARTIR Y MENSAJES TOAST
+       ========================================================= */
+    function shareInvite() {
+      var shareData = {
+        title: 'Mi Cumpleaños - Mirsa Vázquez',
+        text: '¡Te invito a celebrar conmigo! Sábado 10 de octubre de 2026 en Salón Barrera, Villa Corzo.',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch(function(){});
+      } else {
+        copyFallback(window.location.href);
+      }
+    }
+
+    function copyFallback(text) {
+      var tempInput = document.createElement("input");
+      tempInput.style.position = "absolute";
+      tempInput.style.left = "-9999px";
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        showToast("Enlace copiado al portapapeles");
+      } catch (e) {
+        showToast("Copia la URL del navegador");
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function() {
+        t.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
