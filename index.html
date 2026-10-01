@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Mi Cumpleaños - Mirsa Vázquez</title>
 
-  <!-- Open Graph para compartir por WhatsApp -->
+  <!-- Open Graph para previsualizaciones en WhatsApp y redes sociales -->
   <meta property="og:title" content="Mi Cumpleaños - Mirsa Vázquez" />
-  <meta property="og:description" content="¡Te invito a celebrar conmigo! Sábado 10 de octubre de 2026, 2:00 p.m. en Salón Barrera, Villa Corzo." />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" />
+  <meta property="og:description" content="¡Te invito a celebrar conmigo este día tan especial! Sábado 10 de octubre de 2026 a las 2:00 p.m. en Villa Corzo, Chiapas." />
+  <meta property="og:image" content="https://tellotuxtla.github.io/cumple-mirsa/foto.jpg" />
+  <meta property="og:url" content="https://tellotuxtla.github.io/cumple-mirsa/" />
   <meta property="og:type" content="website" />
 
   <!-- Tipografías elegantes de Google Fonts con fallbacks seguros -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500;1,600;1,700&family=Great+Vibes&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -25,9 +26,9 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #f5d4c5;
-      color: #3b221a;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f7ded3;
+      color: #3f2218;
       display: flex;
       justify-content: center;
       min-height: 100vh;
@@ -35,27 +36,119 @@
     }
 
     .font-script {
-      font-family: 'Great Vibes', 'Brush Script MT', cursive;
+      font-family: 'Great Vibes', cursive, 'Brush Script MT', sans-serif;
     }
 
     .font-serif {
       font-family: 'Cormorant Garamond', Georgia, serif;
     }
 
-    /* Contenedor móvil optimizado para iOS/Android */
-    .mobile-container {
+    /* Contenedor central móvil */
+    .mobile-wrapper {
       width: 100%;
-      max-width: 430px;
-      background: linear-gradient(180deg, #fbe2d3 0%, #fdece3 35%, #fae0d4 100%);
+      max-width: 440px;
+      background: linear-gradient(180deg, #fbe3d5 0%, #fdf5f0 35%, #fae2d6 100%);
       min-height: 100vh;
       position: relative;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
-      padding-bottom: 60px;
+      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
+      padding-bottom: 70px;
+    }
+
+    /* Modal / Pantalla de apertura de sobre */
+    #welcomeModal {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, rgba(82, 32, 20, 0.94) 0%, rgba(35, 12, 7, 0.98) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #welcomeModal.hide-modal {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope-card {
+      background: linear-gradient(145deg, #fffaf6 0%, #fbe8dc 100%);
+      border: 2px solid rgba(224, 114, 87, 0.4);
+      border-radius: 32px;
+      padding: 42px 24px;
+      text-align: center;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+      animation: popEnvelope 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popEnvelope {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .envelope-seal {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e67657 0%, #bf4a2e 100%);
+      box-shadow: 0 8px 22px rgba(191, 74, 46, 0.45);
+      margin: 0 auto 18px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .envelope-seal svg {
+      width: 34px;
+      height: 34px;
+      fill: currentColor;
+    }
+
+    .envelope-title {
+      font-size: 3rem;
+      color: #3a1c13;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .envelope-subtitle {
+      font-size: 1.8rem;
+      color: #bf4a2e;
+      margin-bottom: 24px;
+    }
+
+    .btn-open-invite {
+      background: linear-gradient(135deg, #e67657 0%, #bf4a2e 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 36px;
+      font-size: 1.7rem;
+      font-style: italic;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(191, 74, 46, 0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-open-invite:active {
+      transform: scale(0.96);
     }
 
     .hero-banner {
-      background: radial-gradient(circle at 50% 60%, #ffcf96 0%, #eb9265 45%, #c9563b 90%);
-      padding: 60px 20px 65px 20px;
+      background: radial-gradient(circle at 50% 65%, #ffd49e 0%, #ea8d60 42%, #c9563b 92%);
+      padding: 70px 20px 75px 20px;
       text-align: center;
       color: #ffffff;
       position: relative;
@@ -63,30 +156,30 @@
     }
 
     .sun-glow {
-      width: 82px;
-      height: 82px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      background: radial-gradient(circle, #fffaf2 0%, #ffd49e 70%, transparent 100%);
+      background: radial-gradient(circle, #fffaf4 0%, #ffd6a3 65%, transparent 100%);
       margin: 0 auto 16px auto;
-      box-shadow: 0 0 45px #ffd49e;
+      box-shadow: 0 0 55px #ffd6a3;
     }
 
     .hero-title {
-      font-size: 3.8rem;
+      font-size: 4.1rem;
       line-height: 1.1;
       font-weight: 400;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
       margin-bottom: 4px;
     }
 
     .hero-subtitle {
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       font-weight: 400;
-      color: #fff6ee;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.38);
+      color: #fff9f4;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
     }
 
-    /* Botón flotante superior de audio */
+    /* Botón flotante de control de audio en la esquina */
     .audio-btn {
       position: absolute;
       top: 18px;
@@ -95,7 +188,7 @@
       height: 44px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.55);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       display: flex;
@@ -103,14 +196,15 @@
       justify-content: center;
       cursor: pointer;
       color: #ffffff;
-      z-index: 20;
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .audio-bars {
       display: flex;
       align-items: flex-end;
-      gap: 2.5px;
-      height: 16px;
+      gap: 3px;
+      height: 18px;
     }
 
     .audio-bar {
@@ -118,32 +212,33 @@
       background: #ffffff;
       border-radius: 2px;
       height: 6px;
+      transition: height 0.3s ease;
     }
 
-    .audio-playing .bar-1 { animation: pulse 0.7s infinite alternate ease-in-out; }
-    .audio-playing .bar-2 { animation: pulse 1.1s infinite alternate 0.2s ease-in-out; }
-    .audio-playing .bar-3 { animation: pulse 0.9s infinite alternate 0.4s ease-in-out; }
+    .audio-playing .bar-1 { animation: soundWave 0.7s infinite alternate ease-in-out; }
+    .audio-playing .bar-2 { animation: soundWave 1.1s infinite alternate 0.2s ease-in-out; }
+    .audio-playing .bar-3 { animation: soundWave 0.9s infinite alternate 0.4s ease-in-out; }
 
-    @keyframes pulse {
+    @keyframes soundWave {
       0% { height: 4px; }
-      100% { height: 16px; }
+      100% { height: 18px; }
     }
 
-    /* Ilustraciones florales SVG */
+    /* Vectores florales terracota */
     .flower-left, .flower-right {
       position: absolute;
       top: 0;
       height: 100%;
-      width: 150px;
+      width: 155px;
       pointer-events: none;
-      opacity: 0.42;
+      opacity: 0.45;
     }
     .flower-left { left: -10px; }
     .flower-right { right: -10px; }
 
     .content-wrapper {
       padding: 0 16px;
-      margin-top: -28px;
+      margin-top: -30px;
       position: relative;
       z-index: 10;
       display: flex;
@@ -153,9 +248,9 @@
 
     .card {
       background: #ffffff;
-      border-radius: 26px;
+      border-radius: 28px;
       padding: 24px 20px;
-      box-shadow: 0 10px 24px -4px rgba(184, 84, 58, 0.12), 0 3px 10px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 24px -4px rgba(184, 84, 58, 0.14), 0 3px 10px rgba(0, 0, 0, 0.04);
       position: relative;
       border: 1px solid rgba(255, 238, 230, 0.9);
     }
@@ -165,7 +260,7 @@
       height: 48px;
       border-radius: 50%;
       background: linear-gradient(135deg, #f08264 0%, #d86c4f 100%);
-      box-shadow: 0 5px 14px rgba(216, 108, 79, 0.38);
+      box-shadow: 0 6px 16px rgba(216, 108, 79, 0.38);
       position: absolute;
       top: -20px;
       left: 18px;
@@ -198,6 +293,7 @@
       flex-shrink: 0;
     }
 
+    /* 1. Cuenta Regresiva */
     .countdown-header {
       font-size: 2.2rem;
       color: #44241a;
@@ -213,9 +309,9 @@
     }
 
     .countdown-val {
-      font-size: 2.45rem;
+      font-size: 2.5rem;
       font-weight: 700;
-      color: #27140e;
+      color: #2b1610;
       line-height: 1;
       font-style: italic;
     }
@@ -226,17 +322,19 @@
       margin-top: 4px;
     }
 
+    /* 2. Foto */
     .photo-frame {
       width: 100%;
-      height: 300px;
+      height: 310px;
       border-radius: 20px;
       overflow: hidden;
       background: #fdf5f1;
       position: relative;
-      border: 1px solid rgba(216, 108, 79, 0.15);
+      border: 1px solid rgba(216, 108, 79, 0.16);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
 
     .photo-frame img {
@@ -247,29 +345,7 @@
       display: block;
     }
 
-    .photo-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .photo-btn {
-      background: #ffffff;
-      border: 1px solid #f0d5c8;
-      border-radius: 20px;
-      padding: 6px 12px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: #7b4231;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-
-    /* Filas de Fecha, Hora y Ubicación */
+    /* 3. Filas de Detalles */
     .detail-row {
       display: flex;
       align-items: flex-start;
@@ -278,8 +354,8 @@
     }
 
     .detail-icon-circle {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: #fdeee8;
       display: flex;
@@ -291,8 +367,8 @@
     }
 
     .detail-icon-circle svg {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       fill: currentColor;
     }
 
@@ -305,10 +381,18 @@
     }
 
     .place-name {
-      font-size: 1.7rem;
+      font-size: 1.75rem;
       color: #d66447;
       line-height: 1.1;
       margin-bottom: 4px;
+    }
+
+    /* Botones primarios y secundarios */
+    .buttons-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
     }
 
     .btn-primary {
@@ -351,13 +435,60 @@
       font-style: italic;
     }
 
-    .buttons-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 18px;
+    /* Menú desplegable para agregar al calendario */
+    .cal-dropdown-container {
+      position: relative;
+      width: 100%;
     }
 
+    .cal-menu {
+      display: none;
+      position: absolute;
+      top: 105%;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 1px solid rgba(228, 120, 92, 0.3);
+      overflow: hidden;
+      z-index: 30;
+    }
+
+    .cal-menu.show-menu {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cal-item {
+      display: block;
+      padding: 14px 18px;
+      font-size: 1.4rem;
+      color: #4b261b;
+      text-decoration: none;
+      border-bottom: 1px solid #faeee8;
+      text-align: center;
+      background: #ffffff;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .cal-item:last-child {
+      border-bottom: none;
+    }
+
+    .cal-item:hover, .cal-item:active {
+      background: #fdf2ed;
+      color: #cb5a3b;
+    }
+
+    /* 4. Guarda tu invitación - Wallet */
     .wallet-section {
       text-align: center;
     }
@@ -450,6 +581,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
+    /* Mensaje flotante Toast */
     #toast {
       position: fixed;
       bottom: 24px;
@@ -461,7 +593,7 @@
       border-radius: 30px;
       font-size: 0.9rem;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      z-index: 100;
+      z-index: 100000;
       opacity: 0;
       transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
       pointer-events: none;
@@ -475,12 +607,26 @@
 </head>
 <body>
 
-  <div class="mobile-container">
+  <div id="welcomeModal">
+    <div class="envelope-card">
+      <div class="envelope-seal">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </div>
+      <h2 class="font-script envelope-title">Mi Cumpleaños</h2>
+      <p class="font-script envelope-subtitle">Mirsa Vázquez</p>
+      <!-- Click handler triggers audio.play() synchronously directly inside the user gesture -->
+      <button type="button" class="btn-open-invite font-script" id="btnOpenInvite" onclick="openInvitation()">
+        💌 Abrir Invitación
+      </button>
+    </div>
+  </div>
 
-    <!-- Header con sol central y vectores florales -->
+  <!-- Contenedor central -->
+  <div class="mobile-wrapper">
+
     <header class="hero-banner">
-      <!-- Botón de música ambiental -->
-      <button type="button" class="audio-btn" id="audioToggle" onclick="toggleAudio()" title="Música ambiental">
+      <!-- Botón flotante para pausar o reproducir música -->
+      <button type="button" class="audio-btn" id="audioToggle" onclick="toggleAudio()" title="Música de fondo">
         <div class="audio-bars" id="audioBars">
           <div class="audio-bar bar-1"></div>
           <div class="audio-bar bar-2"></div>
@@ -488,12 +634,12 @@
         </div>
       </button>
 
-      <!-- Elemento de audio HTML5 para archivo local musica.mp3 o URL -->
-      <audio id="bgAudio" loop preload="auto">
+      <!-- Elemento de audio con fallback asegurado -->
+      <audio id="bgAudio" loop preload="auto" playsinline webkit-playsinline>
         <source src="musica.mp3" type="audio/mpeg">
-        <source src="musica.ogg" type="audio/ogg">
       </audio>
 
+      <!-- Siluetas florales SVG idénticas a la portada -->
       <svg class="flower-left" viewBox="0 0 160 400">
         <circle cx="30" cy="70" r="26" fill="#d95e3f"/>
         <circle cx="20" cy="50" r="18" fill="#f08865"/>
@@ -524,7 +670,7 @@
 
       <div class="sun-glow"></div>
       <h1 class="font-script hero-title">Mi Cumpleaños</h1>
-      <p class="font-script hero-subtitle">Mirsa Vazquez</p>
+      <p class="font-script hero-subtitle">Mirsa Vázquez</p>
     </header>
 
     <div class="content-wrapper">
@@ -534,25 +680,25 @@
         <h2 class="font-script countdown-header">✨ Cuenta Regresiva ✨</h2>
         <div class="countdown-grid">
           <div>
-            <div id="days" class="font-serif countdown-val">--</div>
+            <div id="days" class="font-serif countdown-val">09</div>
             <div class="font-script countdown-lbl">Días</div>
           </div>
           <div>
-            <div id="hours" class="font-serif countdown-val">--</div>
+            <div id="hours" class="font-serif countdown-val">22</div>
             <div class="font-script countdown-lbl">Horas</div>
           </div>
           <div>
-            <div id="minutes" class="font-serif countdown-val">--</div>
+            <div id="minutes" class="font-serif countdown-val">15</div>
             <div class="font-script countdown-lbl">Minutos</div>
           </div>
           <div>
-            <div id="seconds" class="font-serif countdown-val">--</div>
+            <div id="seconds" class="font-serif countdown-val">38</div>
             <div class="font-script countdown-lbl">Segundos</div>
           </div>
         </div>
       </section>
 
-      <!-- 2. Momentos Especiales con Foto -->
+      <!-- 2. Momentos Especiales (Foto) -->
       <section class="card">
         <div class="pin-badge">
           <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
@@ -563,14 +709,14 @@
           Momentos Especiales
         </h2>
 
-        <!-- FOTO PRINCIPAL: Carga 'foto.jpg' colocada junto a index.html en GitHub -->
+        <!-- Foto real foto.jpg con respaldo automático -->
         <div class="photo-frame">
           <img 
             id="featuredPhoto" 
             src="foto.jpg" 
             alt="Mirsa Vázquez"
             loading="eager"
-            onerror="if(this.src.indexOf('unsplash') === -1) { this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'; }"
+            onerror="if(this.src.indexOf('placeholder') === -1){ this.src='https://placehold.co/600x450/edd5cb/692c1d?text=Mirsa+Vázquez'; }"
           />
         </div>
       </section>
@@ -601,12 +747,19 @@
         </div>
 
         <div class="buttons-grid">
-          <button type="button" class="btn-primary font-script" onclick="addToGoogleCalendar()">
-            📅 Agregar a Google Calendar
-          </button>
-          <button type="button" class="btn-secondary font-script" onclick="downloadICS()">
-            🗓️ Apple Calendar / Outlook (.ics)
-          </button>
+          <div class="cal-dropdown-container">
+            <button type="button" class="btn-primary font-script" onclick="toggleCalendarMenu()">
+              📅 Agregar al Calendario ▾
+            </button>
+            <div class="cal-menu" id="calMenu">
+              <a class="cal-item font-serif" href="javascript:void(0)" onclick="addToGoogleCalendar()">
+                Google Calendar
+              </a>
+              <a class="cal-item font-serif" href="javascript:void(0)" onclick="downloadICS()">
+                Apple Calendar / iPhone (.ics)
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -626,8 +779,8 @@
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           </div>
           <div>
-            <div class="font-script place-name">Salón: Barrera</div>
-            <div class="font-serif detail-text" style="font-weight: 500;">
+            <div class="font-serif place-name">Salón: Barrera</div>
+            <div class="font-serif detail-text" style="font-size: 1.35rem; color: #553429;">
               Tercera Pte. Nte. 52, Conasupo,<br>
               30520 Villa Corzo, Chis., México
             </div>
@@ -635,10 +788,10 @@
         </div>
 
         <div class="buttons-grid">
-          <a class="btn-primary font-script" href="https://www.google.com/maps/search/?api=1&query=Tercera+Pte.+Nte.+52,+Conasupo,+30520+Villa+Corzo,+Chis.,+M%C3%A9xico" target="_blank" rel="noopener noreferrer">
-            📍 Ver en Google Maps
+          <a class="btn-primary font-script" href="https://maps.google.com/?q=Tercera+Pte.+Nte.+52,+Conasupo,+30520+Villa+Corzo,+Chis.,+M%C3%A9xico" target="_blank" rel="noopener">
+            🗺️ Ver en Google Maps
           </a>
-          <a class="btn-secondary font-script" href="https://waze.com/ul?q=Tercera%20Pte.%20Nte.%2052,%20Conasupo,%20Villa%20Corzo,%20Chiapas" target="_blank" rel="noopener noreferrer">
+          <a class="btn-secondary font-script" href="https://waze.com/ul?q=Tercera+Pte.+Nte.+52,+Conasupo,+30520+Villa+Corzo,+Chis.,+M%C3%A9xico" target="_blank" rel="noopener">
             🚗 Abrir en Waze
           </a>
         </div>
@@ -647,257 +800,197 @@
       <!-- 5. Guarda tu invitación -->
       <section class="card wallet-section">
         <div class="pin-badge">
-          <svg viewBox="0 0 24 24"><path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.5c-1.25.78-2 2.17-2 3.5s.75 2.72 2 3.5V18H4v-2.5c1.25-.78 2-2.17 2-3.5s-.75-2.72-2-3.5V6h16v2.5z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M20 6h-3V4c0-1.11-.89-2-2-2H9c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2v2H9V4h6zm5 15H4V8h16v11z"/></svg>
         </div>
 
-        <h2 class="font-script card-title" style="justify-content: center; margin-top: 14px; margin-bottom: 4px;">
+        <h2 class="font-script card-title" style="justify-content: center;">
           Guarda tu invitación
         </h2>
-        <p class="font-serif wallet-subtitle">
-          Llévala en tu bolsillo — aparece sola el día del evento.
-        </p>
+        <p class="font-serif wallet-subtitle">Llévala en tu bolsillo — aparece sola el día del evento.</p>
 
+        <!-- Apilado estilo Apple Wallet de InvitiApp -->
         <div class="wallet-stack-wrapper">
+          <!-- Tarjeta cian trasera -->
           <div class="w-card w-teal">
-            <span style="font-size: 0.75rem; opacity: 0.85;">Pase Especial</span>
-            <span class="font-serif" style="font-style: italic; font-size: 0.95rem;">Villa Corzo, Chiapas</span>
+            <span style="font-size: 0.8rem; opacity: 0.85;">Pase Especial</span>
+            <div class="barcode-row">
+              <div class="bar thin"></div><div class="bar thick"></div><div class="bar"></div>
+              <div class="bar thin"></div><div class="bar"></div><div class="bar thick"></div>
+            </div>
           </div>
+
+          <!-- Tarjeta morada trasera -->
           <div class="w-card w-purple">
-            <span style="font-size: 0.75rem; opacity: 0.85;">Invitación</span>
-            <span class="font-serif" style="font-style: italic; font-size: 0.95rem;">Mirsa Vázquez</span>
+            <span style="font-size: 0.8rem; opacity: 0.85;">Celebración</span>
+            <div class="barcode-row">
+              <div class="bar"></div><div class="bar thin"></div><div class="bar thick"></div>
+              <div class="bar"></div><div class="bar thin"></div><div class="bar thick"></div>
+            </div>
           </div>
+
+          <!-- Tarjeta frontal terracota -->
           <div class="w-card w-front">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="font-script" style="font-size: 1.4rem;">Wallet</span>
-              <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffffff; opacity: 0.8;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size: 0.85rem; font-weight:600; opacity: 0.9;">Wallet</span>
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffffff; opacity: 0.85;"></div>
             </div>
             <div>
-              <div class="font-script" style="font-size: 2.1rem; line-height: 1.1;">Mi Cumpleaños</div>
-              <div style="font-size: 0.7rem; letter-spacing: 1.5px; opacity: 0.9; margin-top: 3px;">10 OCT &bull; 2:00 PM</div>
+              <div class="font-script" style="font-size: 1.85rem; line-height: 1;">Mi Cumpleaños</div>
+              <div class="font-serif" style="font-size: 0.95rem; opacity: 0.9; margin-top: 3px;">10 oct • Mirsa Vázquez</div>
             </div>
             <div class="barcode-row">
-              <span class="bar"></span>
-              <span class="bar thin"></span>
-              <span class="bar thick"></span>
-              <span class="bar thin"></span>
-              <span class="bar"></span>
-              <span class="bar thick"></span>
-              <span class="bar thin"></span>
-              <span class="bar"></span>
-              <span class="bar thick"></span>
-              <span class="bar thin"></span>
-              <span class="bar"></span>
-              <span class="bar thin"></span>
-              <span class="bar thick"></span>
-              <span class="bar"></span>
-              <span class="bar thin"></span>
-              <span class="bar thick"></span>
-              <span class="bar"></span>
+              <div class="bar thick"></div><div class="bar thin"></div><div class="bar"></div>
+              <div class="bar thick"></div><div class="bar"></div><div class="bar thin"></div>
+              <div class="bar thick"></div><div class="bar"></div><div class="bar thin"></div>
+              <div class="bar thick"></div><div class="bar"></div><div class="bar"></div>
             </div>
           </div>
         </div>
 
-        <button type="button" class="btn-primary font-script" onclick="shareInvite()">
-          📤 Compartir Invitación
+        <button type="button" class="btn-primary font-script" onclick="downloadICS()">
+          🎟️ Guardar en mi Calendario
         </button>
       </section>
 
-      <!-- Pie de página -->
-      <footer class="invitation-footer">
-        <p class="font-script footer-phrase">¡Te espero para celebrar juntos este día tan especial!</p>
-        <div class="footer-pill">
-          🎉 Mi Cumpleaños &bull; Salón Barrera
-        </div>
-      </footer>
-
     </div>
 
-    <div id="toast">Enlace copiado al portapapeles</div>
+    <!-- Footer -->
+    <footer class="invitation-footer">
+      <p class="font-script footer-phrase">¡Espero contar con tu presencia!</p>
+      <div class="footer-pill">Invitación Digital Personalizada</div>
+    </footer>
 
   </div>
 
+  <div id="toast"></div>
+
   <script>
-    /* =========================================================
-       1. CUENTA REGRESIVA BLINDADA (100% COMPATIBLE CON IOS SAFARI)
-       ========================================================= */
-    var targetTimestamp = new Date(2026, 9, 10, 14, 0, 0).getTime();
+    // Referencias a los elementos de audio
+    var bgAudio = document.getElementById('bgAudio');
+    var audioBars = document.getElementById('audioBars');
+    var isPlaying = false;
 
-    function updateCountdown() {
-      try {
-        var now = new Date().getTime();
-        var diff = targetTimestamp - now;
-
-        var daysEl = document.getElementById('days');
-        var hoursEl = document.getElementById('hours');
-        var minsEl = document.getElementById('minutes');
-        var secsEl = document.getElementById('seconds');
-
-        if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
-
-        if (diff <= 0) {
-          daysEl.textContent = "00";
-          hoursEl.textContent = "00";
-          minsEl.textContent = "00";
-          secsEl.textContent = "00";
-          return;
+    // 1. APERTURA DE INVITACIÓN: Activación de audio obligatoria por interacción del usuario
+    function openInvitation() {
+      var modal = document.getElementById('welcomeModal');
+      
+      // Iniciar reproducción sincrónica con el click del usuario (requerido por Safari e iOS)
+      if (bgAudio) {
+        var playPromise = bgAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(function() {
+            isPlaying = true;
+            updateAudioUI(true);
+          }).catch(function(err) {
+            console.log("Audio autoplay restringido o no disponible:", err);
+            // Intentar una segunda reproducción suave
+            isPlaying = false;
+            updateAudioUI(false);
+          });
         }
-
-        var totalSeconds = Math.floor(diff / 1000);
-        var d = Math.floor(totalSeconds / (3600 * 24));
-        var h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-        var m = Math.floor((totalSeconds % 3600) / 60);
-        var s = Math.floor(totalSeconds % 60);
-
-        daysEl.textContent = d < 10 ? "0" + d : d;
-        hoursEl.textContent = h < 10 ? "0" + h : h;
-        minsEl.textContent = m < 10 ? "0" + m : m;
-        secsEl.textContent = s < 10 ? "0" + s : s;
-      } catch (err) {
-        console.error("Countdown calculation error:", err);
       }
+
+      // Ocultar modal suavemente
+      modal.classList.add('hide-modal');
     }
 
-    updateCountdown();
-    var timerInterval = setInterval(updateCountdown, 1000);
-    window.addEventListener('load', updateCountdown);
-    document.addEventListener('visibilitychange', function() {
-      if (!document.hidden) updateCountdown();
-    });
+    // 2. Control de Audio Mute/Unmute
+    function toggleAudio() {
+      if (!bgAudio) return;
 
-    /* =========================================================
-       2. REPRODUCTOR DE MÚSICA CON SOPORTE MP3 Y SINTETIZADOR DE RESPALDO
-       ========================================================= */
-    var audioElement = document.getElementById('bgAudio');
-    var audioCtx = null;
-    var isAudioPlaying = false;
-    var melodyTimer = null;
-    var usingSynthesizer = false;
-
-    // Iniciar con la primera interacción del usuario (requerido por iOS/Android)
-    function autoPlayOnFirstTouch() {
-      if (!isAudioPlaying) {
-        toggleAudio(true);
-      }
-      document.removeEventListener('click', autoPlayOnFirstTouch);
-      document.removeEventListener('touchstart', autoPlayOnFirstTouch);
-    }
-    document.addEventListener('click', autoPlayOnFirstTouch, { once: true });
-    document.addEventListener('touchstart', autoPlayOnFirstTouch, { once: true });
-
-    function toggleAudio(isAutoplayTrigger) {
-      var btn = document.getElementById('audioToggle');
-
-      if (isAudioPlaying && !isAutoplayTrigger) {
-        // Pausar
-        isAudioPlaying = false;
-        btn.classList.remove('audio-playing');
-        if (audioElement) audioElement.pause();
-        if (melodyTimer) clearInterval(melodyTimer);
+      if (isPlaying) {
+        bgAudio.pause();
+        isPlaying = false;
+        updateAudioUI(false);
         showToast("Música pausada");
       } else {
-        // Reproducir archivo musica.mp3 primero
-        if (audioElement && audioElement.src) {
-          var playPromise = audioElement.play();
-          if (playPromise !== undefined) {
-            playPromise.then(function() {
-              isAudioPlaying = true;
-              usingSynthesizer = false;
-              btn.classList.add('audio-playing');
-              if (!isAutoplayTrigger) showToast("Reproduciendo música");
-            }).catch(function() {
-              // Si falla o no existe musica.mp3, usamos el sintetizador acústico de respaldo
-              startSynthFallback(btn, isAutoplayTrigger);
-            });
-          } else {
-            startSynthFallback(btn, isAutoplayTrigger);
-          }
-        } else {
-          startSynthFallback(btn, isAutoplayTrigger);
+        var p = bgAudio.play();
+        if (p !== undefined) {
+          p.then(function() {
+            isPlaying = true;
+            updateAudioUI(true);
+            showToast("Reproduciendo música 🎵");
+          }).catch(function(err) {
+            console.error("Error al reproducir audio:", err);
+            showToast("Toca la pantalla para activar el audio");
+          });
         }
       }
     }
 
-    function startSynthFallback(btn, isAutoplayTrigger) {
-      try {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-        playMelody();
-        isAudioPlaying = true;
-        usingSynthesizer = true;
-        btn.classList.add('audio-playing');
-        if (!isAutoplayTrigger) showToast("Reproduciendo música ambiental");
-      } catch (err) {
-        console.warn("No se pudo iniciar el audio:", err);
+    function updateAudioUI(playing) {
+      if (playing) {
+        audioBars.classList.add('audio-playing');
+      } else {
+        audioBars.classList.remove('audio-playing');
       }
     }
 
-    function playNote(freq, start, duration) {
-      if (!audioCtx) return;
-      var osc = audioCtx.createOscillator();
-      var gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime + start);
-      gain.gain.setValueAtTime(0, audioCtx.currentTime + start);
-      gain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + start + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + start + duration);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(audioCtx.currentTime + start);
-      osc.stop(audioCtx.currentTime + start + duration);
-    }
-
-    function playMelody() {
-      var notes = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 293.66, 369.99, 440.00, 587.33];
-      var step = 0;
-      function stepMelody() {
-        if (!isAudioPlaying || !usingSynthesizer) return;
-        playNote(notes[step % notes.length], 0, 1.2);
-        step++;
+    // Si el usuario toca cualquier parte de la pantalla y la música no había arrancado
+    document.addEventListener('touchstart', function() {
+      var modal = document.getElementById('welcomeModal');
+      if (modal && modal.classList.contains('hide-modal') && !isPlaying && bgAudio && bgAudio.paused) {
+        bgAudio.play().then(function() {
+          isPlaying = true;
+          updateAudioUI(true);
+        }).catch(function() {});
       }
-      stepMelody();
-      melodyTimer = setInterval(stepMelody, 650);
-    }
+    }, { once: true, passive: true });
 
-    /* =========================================================
-       3. FOTO DINÁMICA
-       ========================================================= */
-    function promptPhotoUrl() {
-      var photoEl = document.getElementById('featuredPhoto');
-      var current = photoEl ? photoEl.src : "";
-      var res = window.prompt("Pega la URL web de tu foto:", current);
-      if (res && res.trim() !== "") {
-        if (photoEl) photoEl.src = res.trim();
-        showToast("Foto actualizada correctamente");
+    // 3. Cuenta Regresiva compatible con todos los navegadores
+    function updateCountdown() {
+      // Sábado 10 de octubre de 2026, 14:00 (mes 9 = octubre en JS)
+      var targetDate = new Date(2026, 9, 10, 14, 0, 0).getTime();
+      var now = new Date().getTime();
+      var diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('days').innerText = "00";
+        document.getElementById('hours').innerText = "00";
+        document.getElementById('minutes').innerText = "00";
+        document.getElementById('seconds').innerText = "00";
+        return;
       }
+
+      var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = d < 10 ? "0" + d : d;
+      document.getElementById('hours').innerText = h < 10 ? "0" + h : h;
+      document.getElementById('minutes').innerText = m < 10 ? "0" + m : m;
+      document.getElementById('seconds').innerText = s < 10 ? "0" + s : s;
     }
 
-    function previewLocalPhoto(event) {
-      var file = event.target.files[0];
-      if (file) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          var photoEl = document.getElementById('featuredPhoto');
-          if (photoEl) photoEl.src = e.target.result;
-          showToast("Foto cargada desde tu dispositivo");
-        };
-        reader.readAsDataURL(file);
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 4. Menú de Calendario
+    function toggleCalendarMenu() {
+      var menu = document.getElementById('calMenu');
+      menu.classList.toggle('show-menu');
+    }
+
+    document.addEventListener('click', function(e) {
+      var container = document.querySelector('.cal-dropdown-container');
+      if (container && !container.contains(e.target)) {
+        var menu = document.getElementById('calMenu');
+        if (menu) menu.classList.remove('show-menu');
       }
-    }
+    });
 
-    /* =========================================================
-       4. CALENDARIO Y DESCARGA
-       ========================================================= */
     function addToGoogleCalendar() {
       var title = encodeURIComponent("Mi Cumpleaños - Mirsa Vázquez");
-      var details = encodeURIComponent("Celebración del cumpleaños de Mirsa Vázquez en Salón Barrera, Villa Corzo.");
-      var location = encodeURIComponent("Tercera Pte. Nte. 52, Conasupo, 30520 Villa Corzo, Chis., México");
-      var dates = "20261010T200000Z/20261011T040000Z";
-      var url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + title + "&dates=" + dates + "&details=" + details + "&location=" + location;
-      window.open(url, '_blank');
+      var details = encodeURIComponent("Celebración del cumpleaños de Mirsa Vázquez en Salón Barrera.");
+      var location = encodeURIComponent("Salón Barrera, Tercera Pte. Nte. 52, Conasupo, 30520 Villa Corzo, Chis., México");
+      // 10 de octubre de 2026, 14:00 CST (UTC-6) -> 20:00 UTC
+      var start = "20261010T200000Z";
+      var end = "20261011T020000Z";
+      var gcalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + title + "&dates=" + start + "/" + end + "&details=" + details + "&location=" + location;
+      window.open(gcalUrl, '_blank');
+      var menu = document.getElementById('calMenu');
+      if (menu) menu.classList.remove('show-menu');
     }
 
     function downloadICS() {
@@ -905,72 +998,36 @@
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//Invitacion Mirsa Vazquez//ES",
-        "CALSCALE:GREGORIAN",
-        "METHOD:PUBLISH",
         "BEGIN:VEVENT",
-        "UID:mirsa-cumple-2026@invitacion",
-        "DTSTAMP:20260101T000000Z",
-        "DTSTART:20261010T200000Z",
-        "DTEND:20261011T040000Z",
         "SUMMARY:Mi Cumpleaños - Mirsa Vázquez",
-        "DESCRIPTION:Celebración en Salón Barrera\\, Villa Corzo.",
-        "LOCATION:Tercera Pte. Nte. 52\\, Conasupo\\, 30520 Villa Corzo\\, Chis.\\, México",
+        "DESCRIPTION:Celebración del cumpleaños de Mirsa Vázquez en Salón Barrera.",
+        "LOCATION:Salón Barrera\\, Tercera Pte. Nte. 52\\, Conasupo\\, 30520 Villa Corzo\\, Chis.\\, México",
+        "DTSTART:20261010T200000Z",
+        "DTEND:20261011T020000Z",
         "STATUS:CONFIRMED",
         "END:VEVENT",
         "END:VCALENDAR"
       ].join("\r\n");
 
-      var blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
-      var link = document.createElement("a");
+      var blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+      var link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", "Cumpleanos_Mirsa_Vazquez.ics");
+      link.setAttribute('download', 'cumpleanos_mirsa.ics');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showToast("Descargando evento de calendario...");
-    }
-
-    /* =========================================================
-       5. COMPARTIR Y MENSAJES TOAST
-       ========================================================= */
-    function shareInvite() {
-      var shareData = {
-        title: 'Mi Cumpleaños - Mirsa Vázquez',
-        text: '¡Te invito a celebrar conmigo! Sábado 10 de octubre de 2026 en Salón Barrera, Villa Corzo.',
-        url: window.location.href
-      };
-
-      if (navigator.share) {
-        navigator.share(shareData).catch(function(){});
-      } else {
-        copyFallback(window.location.href);
-      }
-    }
-
-    function copyFallback(text) {
-      var tempInput = document.createElement("input");
-      tempInput.style.position = "absolute";
-      tempInput.style.left = "-9999px";
-      tempInput.value = text;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      try {
-        document.execCommand("copy");
-        showToast("Enlace copiado al portapapeles");
-      } catch (e) {
-        showToast("Copia la URL del navegador");
-      }
-      document.body.removeChild(tempInput);
+      showToast("Evento guardado en calendario");
+      var menu = document.getElementById('calMenu');
+      if (menu) menu.classList.remove('show-menu');
     }
 
     function showToast(msg) {
-      var t = document.getElementById('toast');
-      if (!t) return;
-      t.textContent = msg;
-      t.classList.add('show');
+      var toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
       setTimeout(function() {
-        t.classList.remove('show');
-      }, 3000);
+        toast.classList.remove('show');
+      }, 2500);
     }
   </script>
 </body>
